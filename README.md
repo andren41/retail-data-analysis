@@ -1,82 +1,69 @@
-Mini-Projeto Avaliativo — Análise de Dados com Python [T2]
-Módulo 1 - Semana 07 | Curso: Análise de Dados com Python | SCTEC
+# Assessment Mini-Project — Data Analysis with Python [T2]
+**Module 1 - Week 07 | Course: Data Analysis with Python | SCTEC**
 
-Sobre o Projeto
+## About the Project
+Exploratory Data Analysis (EDA) applied to a "Retail" dataset, containing real purchase records (dates, customers, products, and categories) from a supermarket over 4 years (2019–2022). 
 
-Análise Exploratória de Dados (AED) aplicada à base "Varejo", contendo registros reais de compras (datas, clientes, produtos e categorias) de um supermercado ao longo de 4 anos (2019–2022).
+The goal is to transform raw data into useful information through data loading, quality checking, cleaning, descriptive statistics, and clustering pattern analysis.
 
-O objetivo é transformar dados brutos em informações úteis por meio de carregamento, verificação de qualidade, limpeza, estatísticas descritivas e análise de padrões de agrupamento.
-
-Estrutura do Repositório
+## Repository Structure
 
 Miniprojeto_AndreNicolaiPopadiuk_T2/
-miniprojeto.py (Script principal de análise)
-Base Varejo.csv (Base de dados necessária para execução)
-README.md (Este arquivo com reflexão teórica e insights)
-README_AndreNicolaiPopadiuk_T2.md (Instruções de execução)
+├── miniprojeto.py                    # Main analysis script
+├── Base Varejo.csv                   # Database required for execution
+├── README.md                         # This file (theoretical reflection and insights)
+└── README_AndreNicolaiPopadiuk_T2.md # Execution instructions
 
-Como Executar
 
-Consulte o arquivo README_AndreNicolaiPopadiuk_T2.md para o passo a passo completo.
+## How to Run
+Please refer to the README_AndreNicolaiPopadiuk_T2.md file for a complete step-by-step guide.
 
-Resumo rápido (VsCode):
-pip install pandas numpy
+Quick summary (VS Code):
+
+pip install pandas numpy 
 python miniprojeto.py
 
-Tecnologias Utilizadas
 
-csv (nativo): Leitura estruturada do CSV com DictReader
-datetime (nativo): Conversão e validação de datas
-pandas: Manipulação e análise de dados
-numpy: Suporte a estatísticas
+## Technologies Used
+*   **csv (native):** Structured CSV reading using DictReader.
+*   **datetime (native):** Date conversion and validation.
+*   **pandas:** Data manipulation and analysis.
+*   **numpy:** Statistical support.
 
-Reflexão Teórica — ETL e Qualidade de Dados
+---
 
-O que é ETL?
+## Theoretical Reflection — ETL and Data Quality
 
-ETL (Extract, Transform, Load) é o processo fundamental de engenharia de dados que consiste em três etapas:
+### What is ETL?
+ETL (Extract, Transform, Load) is a fundamental data engineering process consisting of three stages:
+1.  **Extract:** Collecting data from one or more raw sources (CSV files, databases, APIs, etc.).
+2.  **Transform:** Cleaning, standardizing, enriching, and restructuring the data to make it reliable and usable.
+3.  **Load:** Delivering the transformed data to a final destination (Data Warehouse, dashboard, ML model, etc.).
 
-1. Extract (Extração): coleta de dados de uma ou mais fontes brutas (arquivos CSV, bancos de dados, APIs, etc.).
-2. Transform (Transformação): limpeza, padronização, enriquecimento e reestruturação dos dados para torná-los confiáveis e utilizáveis.
-3. Load (Carregamento): entrega dos dados transformados a um destino final (Data Warehouse, dashboard, modelo de ML, etc.).
+### Application in this Project
+*   **Extract:** We used csv.DictReader (native Python) to read the Base Varejo.csv file with a semicolon separator. Each row is extracted as a dictionary (column: value), ensuring traceability and control before any transformations. Next, we converted it into a pandas DataFrame to facilitate analytical operations.
+*   **Transform:** 4 unnamed columns (Unnamed) were dropped as they were artifacts with no analytical value. The DATA (Date) column, originally a string, was converted using datetime.strptime, enabling accurate temporal analysis. #N/D values in PR_CAT and PR_NOME were replaced with 'No Category' and 'No Name' using if/else logic, preserving valid record data. Null values in CL_FHL (children) were imputed with 0, indicating the absence of registered children. Records with invalid DATA were removed, as purchase dates cannot be safely imputed. Duplicate rows were dropped to prevent double counting in analyses. Null or negative values in CO_ID were removed for violating the identifier business rule.
+*   **Load:** The clean DataFrame is made available in memory for all subsequent analyses. It can be exported using df.to_csv("varejo_limpo.csv") to feed dashboards or Machine Learning models.
 
-Aplicação neste Projeto
+### Data Quality
+High-quality data must satisfy five dimensions:
+1.  **Completeness:** No null values in critical fields.
+2.  **Consistency:** No invalid values (e.g., #N/D).
+3.  **Uniqueness:** No duplicate rows.
+4.  **Validity:** Adherence to business rules (e.g., positive ID numbers).
+5.  **Timeliness:** Dates correctly converted and validated.
 
-Extract — Extração
-Utilizamos csv.DictReader (Python nativo) para ler o arquivo Base Varejo.csv com separador de ponto e vírgula. Cada linha é extraída como um dicionário (coluna: valor), garantindo rastreabilidade e controle antes de qualquer transformação. Em seguida, convertemos para um DataFrame pandas para facilitar as operações analíticas.
+The Retail dataset presented issues across all five dimensions, all of which were addressed in Sprint 3 of the script.
 
-Transform — Transformação
-4 colunas sem nome (Unnamed) foram removidas por serem artefatos sem valor analítico.
-A coluna DATA como string foi convertida com datetime.strptime, permitindo análise temporal correta.
-Valores #N/D em PR_CAT e PR_NOME foram substituídos por 'Sem Categoria' e 'Sem Nome' via if/else, preservando os dados válidos do registro.
-Nulos em CL_FHL (filhos) foram imputados com 0, indicando a ausência de filho registrado.
-Registros com DATA inválida foram removidos, pois não é possível imputar datas de compra.
-Linhas duplicadas foram removidas para evitar dupla contagem nas análises.
-Valores nulos ou negativos em CO_ID foram removidos por violar a regra de negócio do identificador.
+---
 
-Load — Carregamento
-O DataFrame limpo fica disponível em memória para todas as análises subsequentes. Pode ser exportado com df.to_csv("varejo_limpo.csv") para alimentar dashboards ou modelos de Machine Learning.
+## Main Insights
+*   **Quality:** Approximately 3,650 invalid records (0.44% of the dataset) were identified and handled prior to analysis.
+*   **Top-selling category:** FOOD (ALIMENTOS) is the undisputed leader, followed by HYGIENE and CLEANING, a typical pattern for a local neighborhood supermarket.
+*   **Gender profile:** Female customers made more purchases than male customers across all categories.
+*   **Number of children:** The mode is 0 children, representing by far the demographic that buys the most. Among customers with children, purchase volume remains stable for those with 1, 2, or 3 children (averaging 90k purchases each), dropping sharply only for families with 4 children.
+*   **Social segment:** Segment B accounts for the highest purchase volume during the analyzed period.
+*   **Suspicious consistency:** The proportions between variables are suspiciously uniform over the 4-year period, suggesting possible artificial data inflation. Validation with the primary data source is highly recommended.
 
-Qualidade de Dados
-
-Dados de qualidade precisam satisfazer cinco dimensões:
-Completude: sem nulos em campos críticos.
-Consistência: sem valores inválidos como #N/D.
-Unicidade: sem linhas duplicadas.
-Validade: respeitando regras de negócio (exemplo: identificador positivo).
-Pontualidade: datas convertidas e validadas.
-
-A base Varejo apresentava problemas nas cinco dimensões, todos tratados no Sprint 3 do script.
-
-Principais Insights da Análise
-
-1. Qualidade: Aproximadamente 3.650 registros inválidos (0,44% da base) foram identificados e tratados antes das análises.
-2. Categoria mais vendida: ALIMENTOS lidera isoladamente, seguida por HIGIENE e LIMPEZA, um padrão típico de supermercado de bairro.
-3. Perfil por gênero: Clientes do sexo Feminino realizaram mais compras do que os do sexo Masculino em todas as categorias.
-4. Número de filhos: A moda é 0 filhos, sendo este o público que mais compra disparado. Entre os clientes com filhos, o volume de compras se mantém estável para quem tem 1, 2 ou 3 filhos (média de 90 mil compras cada), caindo de forma mais acentuada apenas para famílias com 4 filhos.
-5. Segmento social: O segmento B concentra o maior volume de compras no período analisado.
-6. Consistência suspeita: As proporções entre variáveis são uniformes demais ao longo de 4 anos, sugerindo possível inflação artificial dos dados. Recomenda-se validação com a fonte primária.
-
-Autor
-
-André Nicolai Popadiuk — Turma T2 | SCTEC | 2026
+**Author**
+André Nicolai Popadiuk — Cohort T2 | SCTEC | 2026
