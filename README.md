@@ -8,15 +8,16 @@ The goal is to transform raw data into useful information through data loading, 
 
 ## Repository Structure
 
-Miniprojeto_AndreNicolaiPopadiuk_T2/
+retail-data-analysis/
 ├── miniprojeto.py                    # Main analysis script
-├── Base Varejo.csv                   # Database required for execution
 ├── README.md                         # This file (theoretical reflection and insights)
-└── README_AndreNicolaiPopadiuk_T2.md # Execution instructions
+├── HOW_TO_RUN.md # Execution instructions
+
+> The dataset (`Base Varejo.csv`) is not included in this repository. Download it from Kaggle: https://www.kaggle.com/datasets/namespaiva/base-varejo/data
 
 
 ## How to Run
-Please refer to the README_AndreNicolaiPopadiuk_T2.md file for a complete step-by-step guide.
+Please refer to the [HOW_TO_RUN.md](HOW_TO_RUN.md) file for a complete step-by-step guide.
 
 Quick summary (VS Code):
 
