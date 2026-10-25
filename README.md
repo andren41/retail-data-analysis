@@ -1,29 +1,33 @@
-# Assessment Mini-Project — Data Analysis with Python [T2]
-**Module 1 - Week 07 | Course: Data Analysis with Python | SCTEC**
+# Retail Sales: Exploratory Data Analysis & Data Cleaning (Python)
+
+**Course mini-project, Data Analysis with Python | SCTEC**
 
 ## About the Project
-Exploratory Data Analysis (EDA) applied to a "Retail" dataset, containing real purchase records (dates, customers, products, and categories) from a supermarket over 4 years (2019–2022). 
+Exploratory Data Analysis (EDA) applied to a public "Retail" dataset from Kaggle, containing purchase records (dates, customers, products, and categories) from a supermarket over 4 years (2019–2022).
 
-The goal is to transform raw data into useful information through data loading, quality checking, cleaning, descriptive statistics, and clustering pattern analysis.
+The goal is to transform raw data into useful information through data loading, quality checking, cleaning, descriptive statistics, and grouping and aggregation analysis.
 
 ## Repository Structure
 
+```
 retail-data-analysis/
-├── miniprojeto.py                    # Main analysis script
-├── README.md                         # This file (theoretical reflection and insights)
-├── HOW_TO_RUN.md # Execution instructions
+├── miniprojeto.py    # Main analysis script
+├── README.md         # This file (theoretical reflection and insights)
+└── HOW_TO_RUN.md     # Execution instructions
+```
 
 > The dataset (`Base Varejo.csv`) is not included in this repository. Download it from Kaggle: https://www.kaggle.com/datasets/namespaiva/base-varejo/data
 
-
 ## How to Run
+
 Please refer to the [HOW_TO_RUN.md](HOW_TO_RUN.md) file for a complete step-by-step guide.
 
 Quick summary (VS Code):
 
-pip install pandas numpy 
+```
+pip install pandas numpy
 python miniprojeto.py
-
+```
 
 ## Technologies Used
 *   **csv (native):** Structured CSV reading using DictReader.
